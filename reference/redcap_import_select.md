@@ -21,11 +21,12 @@ copy-pasting and adjusting/reusing.
 
 ``` r
 redcap_import_select(
-  import_data,
+  input_data,
   dict = NULL,
   rc_token,
   rc_url,
   forms = NULL,
+  batch_size = NULL,
   start_var = 1,
   auto_match = TRUE,
   auto_skip_nomatch = FALSE,
@@ -43,7 +44,7 @@ redcap_import_select(
 
 ## Arguments
 
-- import_data:
+- input_data:
 
   Data frame to be imported
 
@@ -65,6 +66,11 @@ redcap_import_select(
 
   Character vector of the forms as set up in REDCap of which variable
   names will be displayed. Default = all forms.
+
+- batch_size:
+
+  Number of REDCap variables displayed per batch. Default = all
+  variables.
 
 - start_var:
 
@@ -89,7 +95,8 @@ redcap_import_select(
   suggested. With this numeric similarity index between 0 (no similarity
   at all = shows all items) and 1 (identical = shows only perfect
   matches) the number of suggestions can be adjusted. Type '0' to turn
-  off similarity suggestions. Default = 0.5.
+  off similarity suggestions. If auto-skipping is switched off, this
+  index can be adjusted while running the script. Default = 0.5.
 
 - skip_intro:
 

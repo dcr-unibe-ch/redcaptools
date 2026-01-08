@@ -33,7 +33,7 @@ and adjusting/reusing."><meta property="og:image" content="/logo.png"></head><bo
 
     <a class="navbar-brand me-2" href="../index.html">redcaptools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,11 +83,12 @@ and adjusting/reusing.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_import_select</span><span class="op">(</span></span>
-<span>  <span class="va">import_data</span>,</span>
+<span>  <span class="va">input_data</span>,</span>
 <span>  dict <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">rc_token</span>,</span>
 <span>  <span class="va">rc_url</span>,</span>
 <span>  forms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  start_var <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  auto_match <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  auto_skip_nomatch <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -107,7 +108,7 @@ and adjusting/reusing.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-import-data">import_data<a class="anchor" aria-label="anchor" href="#arg-import-data"></a></dt>
+<dl><dt id="arg-input-data">input_data<a class="anchor" aria-label="anchor" href="#arg-input-data"></a></dt>
 <dd><p>Data frame to be imported</p></dd>
 
 
@@ -129,6 +130,10 @@ rc_url)$meta</code>). If not supplied, this will be downloaded from the API usin
 <dt id="arg-forms">forms<a class="anchor" aria-label="anchor" href="#arg-forms"></a></dt>
 <dd><p>Character vector of the forms as set up in REDCap of which
 variable names will be displayed. Default = all forms.</p></dd>
+
+
+<dt id="arg-batch-size">batch_size<a class="anchor" aria-label="anchor" href="#arg-batch-size"></a></dt>
+<dd><p>Number of REDCap variables displayed per batch. Default = all variables.</p></dd>
 
 
 <dt id="arg-start-var">start_var<a class="anchor" aria-label="anchor" href="#arg-start-var"></a></dt>
@@ -153,7 +158,8 @@ the variable. Default = FALSE.</p></dd>
 in REDCap will be suggested. With this numeric similarity index between 0
 (no similarity at all = shows all items) and 1 (identical = shows only
 perfect matches) the number of suggestions can be adjusted. Type '0' to turn
-off similarity suggestions. Default = 0.5.</p></dd>
+off similarity suggestions. If auto-skipping is switched off, this index
+can be adjusted while running the script. Default = 0.5.</p></dd>
 
 
 <dt id="arg-skip-intro">skip_intro<a class="anchor" aria-label="anchor" href="#arg-skip-intro"></a></dt>

@@ -25,7 +25,7 @@ running this function.
 
 ``` r
 redcap_import_recode(
-  selected_data,
+  input_data,
   dict = NULL,
   missing_codes = NULL,
   rc_token,
@@ -50,7 +50,7 @@ redcap_import_recode(
 
 ## Arguments
 
-- selected_data:
+- input_data:
 
   Data to be recoded
 

@@ -8,12 +8,12 @@
 
 ## Citation
 
-Güntensperger D (2025). *redcaptools: Tools for exporting and working
-with REDCap data*. R package version 0.5.1.
+Güntensperger D (2026). *redcaptools: Tools for exporting and working
+with REDCap data*. R package version 0.5.2.
 
     @Manual{,
       title = {redcaptools: Tools for exporting and working with REDCap data},
       author = {Dominik Güntensperger},
-      year = {2025},
-      note = {R package version 0.5.1},
+      year = {2026},
+      note = {R package version 0.5.2},
     }
