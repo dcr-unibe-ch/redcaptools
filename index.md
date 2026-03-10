@@ -9,13 +9,13 @@ You can install the development version of `redcaptools` from github
 with:
 
 ``` r
-remotes::install_github("CTU-Bern/redcaptools")
+remotes::install_github("dcr-unibe-ch/redcaptools")
 ```
 
 Or from CTU Bern’s package universe
 
 ``` r
-install.packages("redcaptools", repos = c('https://ctu-bern.r-universe.dev', 'https://cloud.r-project.org'))
+install.packages("redcaptools", repos = c('https://dcr-unibe-ch.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ## Export data from REDCap
