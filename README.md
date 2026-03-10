@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/dev%20version-0.5.2-blue.svg)](https://github.com/CTU-Bern/redcaptools)
-[![R-CMD-check](https://github.com/CTU-Bern/redcaptools/workflows/R-CMD-check/badge.svg)](https://github.com/CTU-Bern/redcaptools/actions)
+[![](https://img.shields.io/badge/dev%20version-0.5.2-blue.svg)](https://github.com/dcr-unibe-ch/redcaptools)
+[![R-CMD-check](https://github.com/dcr-unibe-ch/redcaptools/workflows/R-CMD-check/badge.svg)](https://github.com/dcr-unibe-ch/redcaptools/actions)
 
 <!-- badges: end -->
 
@@ -21,13 +21,13 @@ with:
 <!-- install.packages("redcaptools") -->
 
 ``` r
-remotes::install_github("CTU-Bern/redcaptools")
+remotes::install_github("dcr-unibe-ch/redcaptools")
 ```
 
 Or from CTU Bern’s package universe
 
 ``` r
-install.packages("redcaptools", repos = c('https://ctu-bern.r-universe.dev', 'https://cloud.r-project.org'))
+install.packages("redcaptools", repos = c('https://dcr-unibe-ch.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ## Export data from REDCap
