@@ -1,6 +1,7 @@
 # redcaptools
 
 ``` r
+
 library(redcaptools)
 ```
 
@@ -19,6 +20,7 @@ event, variables selected, etc.
 beginning with the `redcap_export_byform` function.
 
 ``` r
+
 token <- "my-redcap-token"
 url <- "https://redcap.mydomain.com/api/"
 
@@ -33,6 +35,7 @@ details). The dataset that REDCap exports through the website interface
 is accessed for instance via:
 
 ``` r
+
 record <- redcap_export_tbl(token, url, "record")
 ```
 
@@ -49,6 +52,7 @@ available, it’s not as robust as the API version, but it may still be
 useful.
 
 ``` r
+
 # a small manually downloaded testing dataset
 data <- readRDS(system.file("extdata/test.rda", package = "redcaptools"))
 # the data dictionary
@@ -67,6 +71,7 @@ The `redcap_prep` function is the easiest to use. It wraps all of the
 functions in the following section.
 
 ``` r
+
 meta <- redcap_export_meta(token, url)
 # could also use a data dictionary exported manually
 
@@ -86,6 +91,7 @@ Lists of the options can be obtained with the `singlechoice_opts` and
 `multichoice_opts` functions. These are rather for your information.
 
 ``` r
+
 singlechoice_opts(meta$metadata)
 mutlichoice_opts(meta$metadata)
 ```
@@ -93,6 +99,7 @@ mutlichoice_opts(meta$metadata)
 Factors can be created easily with
 
 ``` r
+
 prepped <- sapply(data, singlechoice_factor, metadata = meta$metadata)
 prepped <- sapply(prepped, multichoice_factor, metadata = meta$metadata)
 ```
@@ -103,6 +110,7 @@ As with single and multiple choice variables, `Date` and `POSIX`
 variables also need handling separately.
 
 ``` r
+
 prepped <- sapply(prepped, redcap_prep_dates, metadata = meta$metadata)
 prepped <- sapply(prepped, redcap_prep_datetimes, metadata = meta$metadata)
 ```

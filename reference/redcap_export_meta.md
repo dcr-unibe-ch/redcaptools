@@ -30,8 +30,7 @@ redcap_export_meta(
 
 - ...:
 
-  other parameters passed to the API (see your REDCap API documentation
-  for options)
+  other options passed to [redcap_export_tbl](redcap_export_tbl.md)
 
 ## Value
 

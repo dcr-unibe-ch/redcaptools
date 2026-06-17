@@ -52,8 +52,7 @@ redcap_export_batch(
 
 - ...:
 
-  other parameters passed to the API (see your REDCap API documentation
-  for options)
+  other options passed to \[redcap_export_tbl\]
 
 ## Value
 

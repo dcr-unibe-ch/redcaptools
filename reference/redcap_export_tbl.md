@@ -5,7 +5,7 @@ Export tables from REDCap
 ## Usage
 
 ``` r
-redcap_export_tbl(token, url, content, ...)
+redcap_export_tbl(token, url, content, ..., headers = NULL)
 ```
 
 ## Arguments
@@ -26,6 +26,10 @@ redcap_export_tbl(token, url, content, ...)
 
   other parameters passed to the API (see your REDCap API documentation
   for options)
+
+- headers:
+
+  named list of http headers (unlikely to be required)
 
 ## Value
 

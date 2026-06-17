@@ -1,6 +1,7 @@
 # REDCap API endpoints
 
 ``` r
+
 library(redcaptools)
 ```
 
@@ -18,6 +19,7 @@ The most important is arguably the `record` endpoint, which allows you
 to download the actual data.
 
 ``` r
+
 redcap_export_tbl(token, url, "record")
 ```
 
@@ -27,6 +29,7 @@ Without the data dictionary, it’s often difficult to tell what a
 variable is.
 
 ``` r
+
 redcap_export_tbl(token, url, "metadata")
 ```
 
@@ -34,6 +37,7 @@ This is one of the three pieces of metadata downloaded by default by the
 `redcap_export_meta` function.
 
 ``` r
+
 redcap_export_meta(token, url)$metadata
 ```
 
@@ -47,6 +51,7 @@ The list of eCRFs (known as instruments in REDCap). This provides a link
 between the data dictionary and the instrument labels as seen in REDCap.
 
 ``` r
+
 redcap_export_tbl(token, url, "instrument")
 ```
 
@@ -55,6 +60,7 @@ redcap_export_tbl(token, url, "instrument")
 The list of events (visits)
 
 ``` r
+
 redcap_export_tbl(token, url, "event")
 ```
 
@@ -62,6 +68,7 @@ This is one of the three pieces of metadata downloaded by the
 `redcap_export_meta` function.
 
 ``` r
+
 redcap_export_meta(token, url)$event
 ```
 
@@ -70,6 +77,7 @@ redcap_export_meta(token, url)$event
 This endpoint lists which forms are available in which events/visits.
 
 ``` r
+
 redcap_export_tbl(token, url, "formEventMapping")
 ```
 
@@ -77,6 +85,7 @@ This is one of the three pieces of metadata downloaded by the
 `redcap_export_meta` function.
 
 ``` r
+
 redcap_export_meta(token, url)$formEventMapping
 ```
 
@@ -85,6 +94,7 @@ redcap_export_meta(token, url)$formEventMapping
 This is of use when repeated forms and/or events are used.
 
 ``` r
+
 redcap_export_tbl(token, url, "repeatingFormsEvents")
 ```
 
@@ -96,6 +106,7 @@ visit structures. In the export, they are visible in the
 endpoint allows one to retrieve the labels for the arms.
 
 ``` r
+
 redcap_export_tbl(token, url, "arm")
 ```
 
@@ -106,5 +117,6 @@ It matches the data dictionary, except for the case of multiple choice
 variables which are exported as x\_**1, x**\_2, etc.
 
 ``` r
+
 redcap_export_tbl(token, url, "exportFieldNames")
 ```

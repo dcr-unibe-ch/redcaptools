@@ -9,12 +9,14 @@ You can install the development version of `redcaptools` from github
 with:
 
 ``` r
+
 remotes::install_github("dcr-unibe-ch/redcaptools")
 ```
 
 Or from CTU Bern’s package universe
 
 ``` r
+
 install.packages("redcaptools", repos = c('https://dcr-unibe-ch.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
@@ -45,6 +47,7 @@ which is relevant to the API token.
 The standard download can be replicated via
 
 ``` r
+
 # the URL ir the same as the website just with '/api/' on the end
 url <- "https://redcap.domain.something/api/"
 token <- readLines("path-to-file-containing-token") # or some other method
@@ -56,6 +59,7 @@ list of dataframes, where each element of the list is a specific eCRF
 from the database.
 
 ``` r
+
 l <- redcap_export_byform(token, url)
 ```
 
@@ -64,6 +68,7 @@ Some of the available metadata stored in REDCap is available via the
 also be downloaded via the website.
 
 ``` r
+
 m <- redcap_export_meta(token, url)
 ```
 
@@ -72,6 +77,7 @@ used to reformat the data - convert variables to date, POSIX, factors,
 etc as appropriate.
 
 ``` r
+
 prepped <- redcap_prep(d, m$metadata)
 prepped_list <- sapply(l, redcap_prep, metadata = m$metadata)
 ```
