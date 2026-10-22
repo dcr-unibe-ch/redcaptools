@@ -1,3 +1,7 @@
+# redcaptools 0.5.4
+
+* adding new functions to make automated CDM more efficient - feed in variables that should not be missing and rules generated automatically with branching logic and form status taken into account
+
 # redcaptools 0.5.3
 
 * allow passing https headers to the API interface
