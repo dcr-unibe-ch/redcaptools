@@ -9,3 +9,6 @@ on:
 jobs:
   call-workflow:
     uses: dcr-unibe-ch/actions/.github/workflows/r-cmd-check.yml@main
+    env:
+      REDCAPTOOLS_KEY: ${{ secrets.REDCAPTOOLS_KEY }}
+    secrets: inherit
