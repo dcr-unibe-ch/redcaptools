@@ -137,7 +137,6 @@ get_embedded_logic_map <- function(metadata) {
 
 
 
-
 #' ----------Generate Smart Conditional NA Rules for REDCap Variables----------
 #'
 #' Evaluates a list of target variables against REDCap metadata to generate 
@@ -145,15 +144,29 @@ get_embedded_logic_map <- function(metadata) {
 #' Rules automatically adjust for REDCap instrument completion status and 
 #' complex branching logic, ignoring incomplete ("gray") forms.
 #'
-#' @details The function handles several REDCap metadata edge cases:
+#' @details 
+#' The function generates vectorized missingness validation rules by processing 
+#' several REDCap metadata and data structures:
 #' \itemize{
-#'   \item Exact variable name matching with fallback to stripped field names 
-#'         (e.g., removing suffixes like \code{_factor}, \code{_date}, or index/slot numbers like \code{_7}).
-#'   \item Automated detection of form completion status columns (\code{<form_name>_complete}).
-#'   \item Mapping embedded branching logic from parent descriptive fields via \code{get_embedded_logic_map()}.
-#'   \item Translating REDCap branching logic to R code via \code{transform_redcap_branching()}.
-#'   \item Column substitution for factor versions of variables (\code{<var>_factor}) present in the target dataset.
+#'   \item \strong{Variable Mapping:} Performs exact matching on dataset column names 
+#'         with fallback to stripped variants (removing suffixes like \code{_factor}, 
+#'         \code{_date}, or index/slot numbers like \code{_7}).
+#'   \item \strong{Form Status Integration:} Auto-detects instrument completion status 
+#'         columns (\code{<form_name>_complete}) in \code{dat} to ensure NA checks 
+#'         only execute on active or completed forms.
+#'   \item \strong{Branching Logic Extraction:} Maps embedded logic from descriptive 
+#'         fields via \code{get_embedded_logic_map()} and translates syntax via 
+#'         \code{transform_redcap_branching()}.
+#'   \item \strong{Factor Substitution:} Scans the target dataset for factor equivalents 
+#'         (\code{<var>_factor}) and substitutes them into translated expressions where required.
 #' }
+#' 
+#' \bold{Note on REDCap API Export Settings:}
+#' The conditional logic relies on unstarted/gray forms having an \code{NA} value 
+#' in their \code{<form_name>_complete} column. Users should export data from REDCap 
+#' using \code{exportBlankForGrayFormStatus = "true"} (or the equivalent API setting). 
+#' Otherwise, gray forms are exported as \code{0} ("Incomplete"), which causes 
+#' validation checks to trigger on forms that were never started.
 #'
 #' @param vars Character vector. Names of dataset columns for which to generate NA validation rules.
 #' @param data Data frame or tbl. The active dataset being validated.
