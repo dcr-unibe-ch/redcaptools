@@ -155,8 +155,8 @@ get_embedded_logic_map <- function(metadata) {
 #'   \item Column substitution for factor versions of variables (\code{<var>_factor}) present in the target dataset.
 #' }
 #'
-#' @param v_list Character vector. Names of dataset columns for which to generate NA validation rules.
-#' @param dat Data frame or tbl. The active dataset being validated.
+#' @param vars Character vector. Names of dataset columns for which to generate NA validation rules.
+#' @param data Data frame or tbl. The active dataset being validated.
 #' @param data_name Character scalar. The string identifier for the dataset (e.g., \code{"krank"}).
 #' @param metadata Data frame. The REDCap project metadata/data dictionary (e.g., \code{m$metadata}).
 #' @param rule_df Tibble or NULL. An existing rules tibble to append new rules to. If \code{NULL}, a new tibble is initialized.
@@ -176,8 +176,8 @@ get_embedded_logic_map <- function(metadata) {
 #' @examples
 #' \dontrun{
 #' rules <- add_smart_na_rules(
-#'   v_list = c("bl_gp_ppi_yn_1", "fup9_gp_ppi_yn_7"),
-#'   dat = krank,
+#'   vars = c("bl_gp_ppi_yn_1", "fup9_gp_ppi_yn_7"),
+#'   data = krank,
 #'   data_name = "krank",
 #'   metadata = main_meta,
 #'   rule_df = NULL,
@@ -187,23 +187,42 @@ get_embedded_logic_map <- function(metadata) {
 #'
 #' @export
 
-add_smart_na_rules <- function(v_list, 
-                               dat, 
+add_smart_na_rules <- function(vars, 
+                               data, 
                                data_name, 
                                metadata, 
                                rule_df = NULL, 
                                dataset = NA_character_,
                                form_name = NULL) {
   
-  if (is.null(dat) || length(v_list) == 0) return(rule_df)
+  if (is.null(data) || length(vars) == 0) return(rule_df)
   
-  dat_cols <- colnames(dat)
-  v_list <- intersect(v_list, dat_cols)
+  dat_cols <- colnames(data)
+  vars <- intersect(vars, dat_cols)
   
-  if (length(v_list) == 0) return(rule_df)
+  if (length(vars) == 0) return(rule_df)
+
+  # --- Data Inspection Warning ---
+  comp_cols <- grep("_complete(_factor)?$", colnames(data), value = TRUE)
+  
+  if (length(comp_cols) > 0) {
+    # Check if complete columns have 0s but zero NAs (typical when exportBlankForGrayFormStatus is FALSE/omitted)
+    has_zeros <- any(sapply(dat[comp_cols], function(x) any(x == 0, na.rm = TRUE)))
+    has_nas   <- any(sapply(dat[comp_cols], function(x) any(is.na(x))))
+    
+    if (has_zeros && !has_nas) {
+      warning(
+        "Detected '0' values in instrument completion status columns with zero NAs. ",
+        "If unstarted (gray) forms were exported as '0' instead of NA, validation rules will fail. ",
+        "Ensure REDCap API call uses `exportBlankForGrayFormStatus = 'true'`.",
+        call. = FALSE
+      )
+    }
+  }
+  # --------------------------------
   
   # 1. Map exported variables: store both exact name and stripped variant
-  mapping_df <- tibble::tibble(dat_var = v_list) |> 
+  mapping_df <- tibble::tibble(dat_var = vars) |> 
     dplyr::mutate(
       stripped_field = stringr::str_remove(dat_var, "_(factor|date|datetime|calc|dmy|ymd)$"),
       stripped_field = stringr::str_remove(stripped_field, "_\\d+$")
