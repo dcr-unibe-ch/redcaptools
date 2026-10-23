@@ -1,7 +1,7 @@
 Package: redcaptools
 Type: Package
 Title: Tools for exporting and working with REDCap data
-Version: 0.5.3
+Version: 0.5.4
 Authors@R: 
     c(
     person(given = "Alan G.", family = "Haynes", role = "cre",
@@ -32,3 +32,4 @@ Imports:
     stringdist
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.0.0
+RoxygenNote: 7.3.3
